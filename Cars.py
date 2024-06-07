@@ -10,17 +10,26 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 LINE_WIDTH = 80
 
+# Load button images
+pen_inactive_img = pygame.image.load("pen_inactive.png")
+pen_active_img = pygame.image.load("pen_active.png")
+eraser_inactive_img = pygame.image.load("eraser_inactive.png")
+eraser_active_img = pygame.image.load("eraser_active.png")
+pen_button_rect = pen_inactive_img.get_rect(topleft=(40, 40))
+eraser_button_rect = eraser_inactive_img.get_rect(topleft=(40, 120))
+
 # Set up the display
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Drawing with Mouse")
 
-# Set the background color
 screen.fill(WHITE)
 pygame.display.flip()
 
-# Main loop
 drawing = False
 last_pos = None
+drawing_color = BLACK  
+pen_active = True  
+eraser_active = False  
 
 def draw(screen, color, start_pos, end_pos, width):
     pygame.draw.line(screen, color, start_pos, end_pos, width)
@@ -38,23 +47,31 @@ while True:
             pygame.quit()
             sys.exit()
         
-        # Start drawing when the mouse button is pressed
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            drawing = True
-            last_pos = clamp_position(event.pos)
+            if pen_button_rect.collidepoint(event.pos):
+                drawing_color = BLACK
+                pen_active = True
+                eraser_active = False
+            elif eraser_button_rect.collidepoint(event.pos):
+                drawing_color = WHITE
+                pen_active = False
+                eraser_active = True
+            else:
+                drawing = True
+                last_pos = clamp_position(event.pos)
         
-        # Stop drawing when the mouse button is released
         elif event.type == pygame.MOUSEBUTTONUP:
             drawing = False
             last_pos = None
         
-        # Draw lines when the mouse is moved while holding the button
         elif event.type == pygame.MOUSEMOTION:
             if drawing:
                 current_pos = clamp_position(event.pos)
                 if last_pos is not None:
-                    draw(screen, BLACK, last_pos, current_pos, LINE_WIDTH)
+                    draw(screen, drawing_color, last_pos, current_pos, LINE_WIDTH)
                 last_pos = current_pos
     
-    # Update the display
+    screen.blit(pen_active_img if pen_active else pen_inactive_img, pen_button_rect)
+    screen.blit(eraser_active_img if eraser_active else eraser_inactive_img, eraser_button_rect)
+    
     pygame.display.flip()
