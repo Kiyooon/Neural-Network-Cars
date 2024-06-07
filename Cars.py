@@ -11,10 +11,10 @@ BLACK = (0, 0, 0)
 LINE_WIDTH = 80
 
 # Load button images
-pen_inactive_img = pygame.image.load("pen_inactive.png")
-pen_active_img = pygame.image.load("pen_active.png")
-eraser_inactive_img = pygame.image.load("eraser_inactive.png")
-eraser_active_img = pygame.image.load("eraser_active.png")
+pen_inactive_img = pygame.image.load("images/pen_inactive.png")
+pen_active_img = pygame.image.load("images/pen_active.png")
+eraser_inactive_img = pygame.image.load("images/eraser_inactive.png")
+eraser_active_img = pygame.image.load("images/eraser_active.png")
 pen_button_rect = pen_inactive_img.get_rect(topleft=(40, 40))
 eraser_button_rect = eraser_inactive_img.get_rect(topleft=(40, 120))
 
