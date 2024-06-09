@@ -1,6 +1,6 @@
 # Neural-Network-Cars
 
-This project demonstrates a car simulation using the NEAT (NeuroEvolution of Augmenting Topologies) algorithm to evolve neural networks that control the behavior of autonomous cars. The goal is for the cars to navigate through a track without colliding with the borders. Click and drag to draw a road. Press spacebar to start the simulation. Cars will generate at the red line.
+This project demonstrates a car simulation using the NEAT (NeuroEvolution of Augmenting Topologies) algorithm to evolve neural networks that control the behavior of autonomous cars. The goal is for the cars to navigate through a track without colliding with the borders.
 
 ## How To Use
 
